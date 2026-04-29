@@ -30,7 +30,7 @@ function randomVehicle() {
     return {
         x: Math.random() * 400 + 40,
         y: canvas.height + Math.random() * 200,
-        speed: Math.random() * 1 + 0.5,
+        speed: Math.random() * 1.5 + 1,   // <-- increased speed
         number: Math.floor(Math.random() * 10).toString(),
         image: images[Math.floor(Math.random() * images.length)]
     };
@@ -61,19 +61,23 @@ function drawVehicle(v) {
 function update() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    vehicles.forEach((v, index) => {
-        v.y -= v.speed;
+    for (let i = 0; i < vehicles.length; i++) {
+        let v = vehicles[i];
 
+        // 🚀 Move UP clearly (increase speed visibility)
+        v.y -= v.speed * 2;   // <-- IMPORTANT FIX
+
+        // 🔄 Reset when goes off screen
         if (v.y < -100) {
-            vehicles[index] = randomVehicle();
+            vehicles[i] = randomVehicle();
+            vehicles[i].y = canvas.height + Math.random() * 200;
         }
 
         drawVehicle(v);
-    });
+    }
 
     requestAnimationFrame(update);
 }
-
 // 🎮 Key press
 document.addEventListener("keydown", (e) => {
     let key = e.key;
