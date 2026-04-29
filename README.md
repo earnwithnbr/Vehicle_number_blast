@@ -1,2 +1,2 @@
-# Vehicle_number_blast
+# Game_Vehicle_number_blast
 Game for kids to learn about numbers, by blasting balloons on the vehicles
